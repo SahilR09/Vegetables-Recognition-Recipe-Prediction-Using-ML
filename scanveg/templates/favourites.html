@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourite Recipes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("https://i.pinimg.com/736x/f9/98/86/f99886a97ba4e7b0aa4d8b33e00b060c.jpg");
+            color: #ffffff; /* White text */
+            background-size: cover; /* Cover entire screen */
+        }
+
+        header {
+            background-color: #3cb371; /* Solid light blue */
+            color: #f5f7f9; /* Light color for text */
+            padding: 40px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .welcome-message {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        .navbar {
+            display: flex;
+            text-align: center;
+            margin: auto;
+            justify-content: center; /* Center the buttons */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            background-color: white;
+            color: #008000; /* Blue color for text */
+            font-size: 16px;
+            margin: 0 0.5em; /* Remove all margins */
+            padding: 0 10px; /* Padding for internal space */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: #98fb98;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 1em;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            color: black; /* Ensure text color is readable */
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            color: #008000;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 1em;
+            color: #4CAF50;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 1em 0;
+        }
+
+        .recipe-item {
+            border: 1px solid #ddd;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe-item h3 {
+            margin-top: 0;
+        }
+
+        .recipe-item form {
+            margin-top: 1em;
+        }
+
+        .recipe-item button {
+            padding: 0.5em 1em;
+            border: none;
+            background-color: #d9534f; /* Red button */
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .recipe-item button:hover {
+            background-color: #c9302c; /* Darker red on hover */
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        Vegetables Recognition & Recipe Prediction using ML
+        {% if user.is_authenticated %}
+            <p class="welcome-message">Welcome, {{ user.username }}!</p>
+        {% else %}
+            <p class="welcome-message">Welcome, Guest!</p>
+        {% endif %}
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'prediction' %}">Prediction</a>
+        <a href="{% url 'favourites' %}">View Favourites</a>
+        <a href="{% url 'profile' %}">Profile Settings</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+<br />
+    <!-- Main Content Area -->
+    <div class="container">
+        <h1>Your Favourite Recipes</h1>
+        <hr>
+        {% if favourite_recipes %}
+            <div>
+                {% for recipe in favourite_recipes %}
+                    <div class="recipe-item">
+                        <h3>{{ recipe.recipe_name }}</h3>
+                        <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+                        <p><strong>Preparation Time:</strong> {{ recipe.prep_time }} mins</p>
+                        <p><strong>Cooking Time:</strong> {{ recipe.cook_time }} mins</p>
+                        <p><strong>Cuisine:</strong> {{ recipe.cuisine }}</p>
+                        <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+
+                        <!-- Remove Favourite Recipe Form -->
+                        <form method="POST" action="{% url 'remove_from_favourites' recipe.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Remove from Favourites</button>
+                        </form>
+                    </div>
+                    <hr /> <!-- Partition line between recipes -->
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No favourite recipes found.</p>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

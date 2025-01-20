@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetable Recognition & Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("https://i.pinimg.com/736x/f9/98/86/f99886a97ba4e7b0aa4d8b33e00b060c.jpg");
+            background-size: cover; /* Cover entire screen */
+            background-attachment: fixed; /* Fix the background image */
+            color: #ffffff; /* White text */
+        }
+
+        header {
+            background-color: #3cb371; /* Solid light blue */
+            padding: 40px;
+            text-align: center;
+            color: #f5f7f9;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1; /* Ensure header is above the body content */
+        }
+
+        .welcome-message {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        .navbar {
+            display: flex;
+            text-align: center;
+            margin: auto;
+            justify-content: center; /* Center the buttons */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            background-color: white;
+            color: #008000; /* Blue color for text */
+            font-size: 16px;
+            margin: 0 0.5em; /* Remove all margins */
+            padding: 0 10px; /* Padding for internal space */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: #98fb98; /* Semi-transparent light blue */
+        }
+
+        p {
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 1.5em;
+            color: black;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            max-width: 600px; /* Limiting width for better readability */
+        }
+
+        .container {
+            text-align: center;
+            display: flex;
+            color: #100d0d;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; /* Ensure the content takes most of the page height */
+            margin: 0 auto;
+        }
+
+        .center-button {
+            background-color: #3cb371; /* Blue button */
+            color: #100d0d;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .center-button:hover {
+            background-color: #008000; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        Vegetables Recognition & Recipe Prediction using ML
+        {% if user.is_authenticated %}
+            <p class="welcome-message">Welcome, {{ user.username }}!</p>
+        {% else %}
+            <p class="welcome-message">Welcome, Guest!</p>
+        {% endif %}
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'prediction' %}">Prediction</a>
+        <a href="{% url 'favourites' %}">View Favourites</a>
+        <a href="{% url 'profile' %}">Profile Settings </a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <!-- Main Content Area -->
+    <center><br /><br /><br /><br />
+        <a class="center-button" href="{% url 'prediction' %}">Get Started with Prediction</a>
+    </center>
+
+</body>
+</html>

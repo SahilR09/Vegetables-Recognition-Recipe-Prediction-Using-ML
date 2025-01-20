@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("https://i.pinimg.com/736x/f9/98/86/f99886a97ba4e7b0aa4d8b33e00b060c.jpg");
+            color: #db5b5b; /* White text */
+            background-size: cover; /* Cover entire screen */
+        }
+
+        header {
+            background-color: #3cb371; /* Solid light blue */
+            color: #f5f7f9; /* Light color for text */
+            padding: 40px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .welcome-message {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            color: #ffffff;
+        }
+        .navbar {
+            display: flex;
+            text-align: center;
+            margin: auto;
+            justify-content: center; /* Center the buttons */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            background-color: white;
+            color: #008000; /* Blue color for text */
+            font-size: 16px;
+            margin: 0 0.5em; /* Remove all margins */
+            padding: 0 10px; /* Padding for internal space */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: #98fb98; 
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 1em;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            overflow-y: auto;
+            color: black; /* Ensure text color is readable */
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 1em;
+            color: #008000; /* Blue color for text */
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 1em 0;
+        }
+
+        pre {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1em;
+            border-radius: 5px;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+
+        .center-button {
+            background-color: #3cb371; /* Blue button */
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .center-button:hover {
+            background-color: #008000; /* Darker blue on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        Vegetables Recognition & Recipe Prediction using ML
+        {% if user.is_authenticated %}
+            <p class="welcome-message">Welcome, {{ user.username }}!</p>
+        {% else %}
+            <p class="welcome-message">Welcome, Guest!</p>
+        {% endif %}
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'prediction' %}">Prediction</a>
+        <a href="{% url 'favourites' %}">View Favourites</a>
+        <a href="{% url 'profile' %}">Profile Settings</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <h1>About the Project</h1>
+        <h2>Team</h2>
+        <hr>
+        <pre>Members :
+
+            <b>Krina Gondaliya</b>: User Interface.
+
+            <b>Daxit Talaviya</b>: Model Backend, Image Prediction, internal modules.
+
+            <b>Siddhant Gayakward</b>: LogIn, SignUp.
+
+            <b>Sahil Rangi</b>: Full module of Youtube Video Fetching.
+            
+            <b>Vipsa Kyada</b>: Favourite Page.
+        </pre>
+
+        <h2>About Dataset, CSV, and YTAPI</h2>
+        <hr>
+        <pre>Features a curated CSV file with detailed recipes, and YouTube API for videos for visual cooking guides. The model is trained with an images dataset containing 15 different vegetables. This rich resource enhances our ML model's ability to accurately identify vegetables and suggest diverse, engaging recipes.</pre>
+        <hr>
+        <h2>Content</h2>
+        <hr>
+        <pre>Key Features:
+
+        <b>Image Recognition</b>: Using cutting-edge ML models, the app accurately detects the type of vegetable in your image.
+
+        <b>Recipe Suggestions</b>: Receive tailored recipe recommendations based on the identified vegetable, with detailed instructions provided in text format.
+
+        <b>Video Tutorials</b>: Access curated YouTube videos for visual step-by-step guides on preparing your chosen recipes.
+
+        <b>CSV Integration</b>: Recipes are sourced from a comprehensive CSV file, ensuring a diverse table of culinary options.
+        </pre>
+
+        <!-- Example Button -->
+        <button class="center-button">Learn More</button>
+    </div>
+
+</body>
+
+</html>
